@@ -94,7 +94,6 @@ jobs:
         id: build
         timeout-minutes: ${{ inputs.timeout }}
         continue-on-error: ${{ inputs.buildContinueOnError }}
-        # use fixed docker windows usage, as per https://discord.com/channels/710946343828455455/1156880998122913872/1157680471451381831
         uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -103,9 +102,6 @@ jobs:
         with:
           targetPlatform: ${{ inputs.targetPlatform }}
           customParameters: -development
-          # use the custom win installation with vc redist included only if using windows, otherwise the default image is good
-          # customImage: ${{ inputs.targetPlatform == 'StandaloneWindows' && 'redglow/editor:windows-2022.3.10f1-windows-il2cpp-3-vstoolsworkload' || '' }}
-          # customImage: ${{ inputs.targetPlatform == 'StandaloneWindows' && 'unityci/editor:ubuntu-2022.3.10f1-windows-mono-3.0.1' || '' }}
       
       # Save as artifact
       - name: Upload build as artifact
