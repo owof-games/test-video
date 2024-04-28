@@ -5,7 +5,7 @@ on:
     inputs:
       include_windows:
         type: boolean
-        default: false
+        default: true
       include_macos:
         type: boolean
         default: false
@@ -14,7 +14,7 @@ on:
         default: false
       include_webgl:
         type: boolean
-        default: true
+        default: false
 
 jobs:
   build-and-upload:
