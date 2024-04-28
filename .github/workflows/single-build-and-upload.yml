@@ -59,7 +59,7 @@ jobs:
 
       # Checkout (without LFS)
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Git LFS
       - name: Create LFS file list
@@ -67,7 +67,7 @@ jobs:
         run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
 
       - name: Restore LFS cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: lfs-cache
         with:
           path: .git/lfs
@@ -82,7 +82,7 @@ jobs:
 
       # Cache
       - name: Cache Library
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
@@ -105,7 +105,7 @@ jobs:
       
       # Save as artifact
       - name: Upload build as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.targetPlatform }}
           path: ${{ inputs.targetPlatform == 'WebGL' && 'build/WebGL/WebGL' || 'build' }}
@@ -122,7 +122,7 @@ jobs:
     # this could get stuck for a LONG time
     # maybe related to https://github.com/actions/upload-artifact/issues/270
     - name: Download build
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ${{ inputs.targetPlatform }}
         path: ${{ inputs.targetPlatform }}
